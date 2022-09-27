@@ -56,7 +56,29 @@ app.get("/people", async(req,res)=>{
         res.status(400).json(error) //catch the error 
     }
 })
+//People New
 
+//People Delete
+app.delete("/people/:id", async(req,res)=>{
+    try{
+        //send all people
+        res.json(await People.findByIdAndDelete(req.params.id))
+    } catch(error){
+        //send error
+        res.status(400).json(error)
+    }
+})
+//People Update
+app.put("/people/:id", async(req,res)=>{
+    try{
+        //send all people
+        res.json(
+            await People.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        )
+    } catch(error){
+        res.status(400).json(error)
+    }
+})
 //People Create
 app.post("/people", async (req,res)=>{
     try{
